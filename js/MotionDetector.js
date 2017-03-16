@@ -1,3 +1,13 @@
+/*********************************************************************
+*  #### JS Motion Visualiser ####
+*  Coded by Jason Mayes. www.jasonmayes.com
+*  Please keep this disclaimer with my code if you use it anywhere. 
+*  Thanks. :-)
+*  Got feedback or questions, ask here:
+*  Github: https://github.com/jasonmayes/JS-Motion-Detection/
+*  Updates will be posted to this site.
+*********************************************************************/
+
 // Cross browser support to fetch the correct getUserMedia object.
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia
   || navigator.mozGetUserMedia || navigator.msGetUserMedia;
