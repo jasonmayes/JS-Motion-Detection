@@ -1,5 +1,5 @@
 # JS-Motion-Detection
-A simple yet fast motion revealing algorithm using the live webcam feed
+A simple, fast, and lightweight (just 531 bytes gzipped when minfied using Google Closure) motion revealing algorithm using the live webcam feed
 
 ## What is this?
 
