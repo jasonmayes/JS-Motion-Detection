@@ -1,7 +1,7 @@
 /*********************************************************************
 *  #### JS Motion Visualiser ####
 *  Coded by Jason Mayes. www.jasonmayes.com
-*  Please keep this disclaimer with my code if you use it anywhere. 
+*  Please keep this disclaimer with my code if you use it anywhere.
 *  Thanks. :-)
 *  Got feedback or questions, ask here:
 *  Github: https://github.com/jasonmayes/JS-Motion-Detection/
@@ -29,8 +29,9 @@ var MotionDetector = (function() {
   var localStream = null;
   var imgData = null;
   var imgDataPrev = [];
+  var timing = null;
 
- 
+
   function success(stream) {
     localStream = stream;
     // Create a new object URL to use as the video's source.
@@ -38,7 +39,7 @@ var MotionDetector = (function() {
     video.play();
   }
 
-  
+
   function handleError(error) {
     console.error(error);
   }
@@ -79,25 +80,44 @@ var MotionDetector = (function() {
           imgData.data[x + 2] = blended;
           imgData.data[x + 3] = 255;
         }
-        x += 4; 
+        x += 4;
       }
       ctxFinal.putImageData(imgData, 0, 0);
     }
   }
 
-  
+
   function init_() {
-    if (navigator.getUserMedia) { 
+    if (navigator.getUserMedia) {
       navigator.getUserMedia({video:true}, success, handleError);
-    } else { 
+    } else {
       console.error('Your browser does not support getUserMedia');
     }
-    window.setInterval(snapshot, 32);
+    timing = window.setInterval(snapshot, 32);
+  }
+
+  function stop_() {
+      clearInterval(timing);
+      localStream.getTracks().forEach( (track) => {
+          track.stop();
+      });
   }
 
   return {
-    init: init_
+    init: init_,
+    stop: stop_
   };
 })();
 
-MotionDetector.init();
+(function registerClickHandler () {
+    // Implement the click handler here for button of class 'remove'
+    var btnStop = document.getElementById('btnStop');
+    btnStop.onclick = function(e) {
+        MotionDetector.stop();
+    }
+
+    var btnInit = document.getElementById('btnInit');
+    btnInit.onclick = function(e) {
+        MotionDetector.init();
+    }
+})();
