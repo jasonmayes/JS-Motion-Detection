@@ -34,7 +34,7 @@ var MotionDetector = (function() {
   function success(stream) {
     localStream = stream;
     // Create a new object URL to use as the video's source.
-    video.src = (window.URL && window.URL.createObjectURL(stream)) || stream;
+    video.srcObject = stream
     video.play();
   }
 
